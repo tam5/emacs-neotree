@@ -193,12 +193,6 @@ window."
   :type 'boolean
   :group 'neotree)
 
-(defcustom neo-show-dir-arrows t
-  "*If non-nil, show collapse/expand arrows next to directory icons.
-This only makes sense to customize if using the `icons` theme."
-  :type 'boolean
-  :group 'neotree)
-
 (defcustom neo-theme 'classic
   "*The tree style to display.
 `classic' use icon to display, it only it suitable for GUI mode.
@@ -1246,9 +1240,9 @@ Optional NODE-NAME is used for the `icons' theme"
       (unless (require 'all-the-icons nil 'noerror)
         (error "Package `all-the-icons' isn't installed"))
       (setq-local tab-width 1)
-      (or (and (equal name 'open)  (insert (all-the-icons-icon-for-dir node-name (if neo-show-dir-arrows "down"))))
-          (and (equal name 'close) (insert (all-the-icons-icon-for-dir node-name (if neo-show-dir-arrows "right"))))
-          (and (equal name 'leaf)  (insert (format (if neo-show-dir-arrows "\t\t\t%s\t" "\t\t%s\t") (all-the-icons-icon-for-file node-name))))))
+      (or (and (equal name 'open)  (insert (format "\t\t%s\t" (all-the-icons-material "folder_open"))))
+          (and (equal name 'close) (insert (format "\t\t%s\t" (all-the-icons-material "folder"))))
+          (and (equal name 'leaf)  (insert (format "\t\t%s\t" (all-the-icons-icon-for-file node-name))))))
      (t
       (or (and (equal name 'open)  (funcall n-insert-symbol "- "))
           (and (equal name 'close) (funcall n-insert-symbol "+ ")))))))
@@ -1382,7 +1376,7 @@ PATH is value."
       (insert-char ?\s 2))
     (neo-buffer--insert-fold-symbol
      (if expanded 'open 'close) node)
-    (insert-button (concat node-short-name "/")
+    (insert-button (concat node-short-name)
                    'follow-link t
                    'face neo-dir-link-face
                    'neo-full-path node
