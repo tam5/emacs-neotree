@@ -421,6 +421,13 @@ By default it is xdg-open."
   :group 'neotree :group 'font-lock-highlighting-faces)
 (defvar neo-dir-link-face 'neo-dir-link-face)
 
+(defface neo-dir-icon-face
+  '((((background dark)) (:foreground "DeepSkyBlue"))
+    (t                   (:foreground "MediumBlue")))
+  "*Face used for file icon  in neotree buffer."
+  :group 'neotree :group 'font-lock-highlighting-faces)
+(defvar neo-dir-icon-face 'neo-dir-icon-face)
+
 (defface neo-file-link-face
   '((((background dark)) (:foreground "White"))
     (t                   (:foreground "Black")))
@@ -1240,8 +1247,8 @@ Optional NODE-NAME is used for the `icons' theme"
       (unless (require 'all-the-icons nil 'noerror)
         (error "Package `all-the-icons' isn't installed"))
       (setq-local tab-width 1)
-      (or (and (equal name 'open)  (insert (format "\t\t%s\t" (all-the-icons-material "folder_open"))))
-          (and (equal name 'close) (insert (format "\t\t%s\t" (all-the-icons-material "folder"))))
+      (or (and (equal name 'open)  (insert (format "\t\t%s\t" (all-the-icons-material "folder_open" :face neo-dir-icon-face))))
+          (and (equal name 'close) (insert (format "\t\t%s\t" (all-the-icons-material "folder" :face neo-dir-icon-face))))
           (and (equal name 'leaf)  (insert (format "\t\t%s\t" (all-the-icons-icon-for-file node-name))))))
      (t
       (or (and (equal name 'open)  (funcall n-insert-symbol "- "))
