@@ -1249,7 +1249,7 @@ Optional NODE-NAME is used for the `icons' theme"
       (setq-local tab-width 1)
       (or (and (equal name 'open)  (insert (format "\t\t%s\t" (all-the-icons-material "folder_open" :face neo-dir-icon-face))))
           (and (equal name 'close) (insert (format "\t\t%s\t" (all-the-icons-material "folder" :face neo-dir-icon-face))))
-          (and (equal name 'leaf)  (insert (format "\t\t%s\t" (all-the-icons-icon-for-file node-name))))))
+          (and (equal name 'leaf)  (insert (format "\t\t%s\t" (all-the-icons-icon-for-file node-name :height 0.8 :v-adjust 0))))))
      (t
       (or (and (equal name 'open)  (funcall n-insert-symbol "- "))
           (and (equal name 'close) (funcall n-insert-symbol "+ ")))))))
