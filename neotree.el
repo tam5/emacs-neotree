@@ -1571,7 +1571,7 @@ If there is no button in current line, then return DEFAULT."
          msg)
     (unless (null current-path)
       (setq msg (format "Rename [%s] to: " (neo-path--file-short-name current-path)))
-      (setq to-path (read-file-name msg (file-name-directory current-path)))
+      (setq to-path (read-file-name msg (neo-path--file-truename current-path)))
       (if buffer
           (with-current-buffer buffer
             (set-visited-file-name to-path nil t)))
@@ -1588,7 +1588,7 @@ If there is no button in current line, then return DEFAULT."
          msg)
     (unless (null current-path)
       (setq msg (format "Copy [%s] to: " (neo-path--file-short-name current-path)))
-      (setq to-path (read-file-name msg (file-name-directory current-path)))
+      (setq to-path (read-file-name msg (neo-path--file-truename current-path)))
       (if (file-directory-p current-path)
           (copy-directory current-path to-path)
         (copy-file current-path to-path))
